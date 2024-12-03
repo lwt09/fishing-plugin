@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Image Transparency Toggle",
+    "version": "1.0",
+    "description": "Toggle transparency of images on web pages.",
+    "permissions": ["activeTab"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "images/fish.png",
+      "48": "images/fish.png",
+      "128": "images/fish.png"
+    }
+  }

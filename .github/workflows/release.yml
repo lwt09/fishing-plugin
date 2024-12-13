@@ -9,7 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -28,11 +29,19 @@ jobs:
         run: pnpm build
         
       - name: Create Extension ZIP
-        run: pnpm zip
+        run: cd dist && zip -r ../my-chrome-extension.zip *
+        
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
         
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          name: Release ${{ env.VERSION }}
           files: my-chrome-extension.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

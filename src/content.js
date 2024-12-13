@@ -1,16 +1,25 @@
-let isTransparent = false;
-
-function toggleTransparency(opacity = 0.5) {
-  const images = document.querySelectorAll('img');
-  images.forEach((img) => {
-    img.style.opacity = isTransparent ? '1' : opacity.toString();
-  });
-  isTransparent = !isTransparent;
-}
-
+// 监听来自 popup 和 background 的消息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'toggleTransparency') {
-    toggleTransparency(request.opacity);
-    sendResponse({ status: 'done' });
+  if (request.action === 'setOpacity') {
+    const elements = [
+      ...document.getElementsByTagName('img'),
+      ...document.getElementsByTagName('video'),
+    ];
+
+    elements.forEach((el) => {
+      el.style.opacity = request.opacity;
+      el.dataset.transparencyToggled = 'true';
+    });
+
+    sendResponse({ success: true });
+  } else if (request.action === 'resetOpacity') {
+    const elements = document.querySelectorAll('[data-transparency-toggled]');
+    elements.forEach((el) => {
+      el.style.opacity = '1';
+      delete el.dataset.transparencyToggled;
+    });
+
+    sendResponse({ success: true });
   }
+  return true;
 });

@@ -1,4 +1,17 @@
 chrome.action.onClicked.addListener(async (tab) => {
+  console.log(`tab: ${tab}`);
+  toggleTransparency(tab, 'click');
+});
+
+chrome.commands.onCommand.addListener((command, tab) => {
+  console.log(`command: ${command}`);
+  if (command === 'toggle-transparency') {
+    toggleTransparency(tab, 'command');
+  }
+});
+
+async function toggleTransparency(tab, triggerType) {
+  console.log(`[background-runtime] triggerType: ${triggerType}`);
   // 先设置初始透明度
   await chrome.tabs.sendMessage(tab.id, {
     action: 'setOpacity',
@@ -12,4 +25,4 @@ chrome.action.onClicked.addListener(async (tab) => {
     width: 300,
     height: 200,
   });
-});
+}

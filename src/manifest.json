@@ -24,5 +24,15 @@
       "16": "images/fish.png",
       "48": "images/fish.png",
       "128": "images/fish.png"
+    },
+    "commands": {
+      "toggle-transparency": {
+        "suggested_key": {
+          "mac": "Command+B",
+          "windows": "Ctrl+B",
+          "linux": "Ctrl+B"
+        },
+        "description": "Toggle image transparency"
+      }
     }
-  }
+}

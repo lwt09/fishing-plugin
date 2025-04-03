@@ -12,17 +12,23 @@ chrome.commands.onCommand.addListener((command, tab) => {
 
 async function toggleTransparency(tab, triggerType) {
   console.log(`[background-runtime] triggerType: ${triggerType}`);
-  // 先设置初始透明度
-  await chrome.tabs.sendMessage(tab.id, {
-    action: 'setOpacity',
-    opacity: '0.1',
-  });
 
-  // 等待透明度设置完成后再打开面板
-  chrome.windows.create({
-    url: 'popup.html',
-    type: 'popup',
-    width: 300,
-    height: 200,
-  });
+  if (triggerType === 'command') {
+    // 存储当前标签页ID，供popup使用
+    await chrome.storage.local.set({ activeTabId: tab.id });
+
+    // 创建新窗口
+    await chrome.windows.create({
+      url: 'popup.html',
+      type: 'popup',
+      width: 300,
+      height: 200,
+    });
+
+    // 设置初始透明度为15%
+    await chrome.tabs.sendMessage(tab.id, {
+      action: 'setOpacity',
+      opacity: '0.15',
+    });
+  }
 }

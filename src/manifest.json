@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Image Transparency Toggle",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Toggle transparency of images on web pages.",
   "permissions": [
     "activeTab",

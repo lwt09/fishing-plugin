@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const resetButton = document.getElementById('reset');
   const applyButton = document.getElementById('apply');
   const halfOpacityButton = document.getElementById('half-opacity');
+  const threeQuartersOpacityButton = document.getElementById('three-quarters-opacity');
 
   // 获取活动标签页ID和初始化面板
   let activeTabId = null;
@@ -29,9 +30,9 @@ document.addEventListener('DOMContentLoaded', async function () {
       action: 'getOpacity',
     });
 
-    if (response && response.currentOpacities) {
+    if (response && response.currentOpacity) {
       // 显示图片的透明度值
-      syncValues(response.currentOpacities.image * 100);
+      syncValues(response.currentOpacity * 100);
     } else {
       // 使用默认值
       syncValues(22); // 图片默认值
@@ -48,39 +49,41 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // 应用透明度的通用函数
-  async function applyOpacity(opacity, type) {
+  async function applyOpacity(opacity) {
     try {
       await chrome.tabs.sendMessage(activeTabId, {
         action: 'setOpacity',
         opacity: opacity.toString(),
-        type: type,
       });
+      syncValues(opacity * 100);
     } catch (error) {
       console.error('Error applying opacity:', error);
     }
   }
 
-  // 应用按钮 - 只改变图片透明度
+  // 应用按钮
   applyButton.addEventListener('click', async function () {
     const opacity = slider.value / 100;
-    await applyOpacity(opacity, 'image');
+    await applyOpacity(opacity);
   });
 
-  // 50%透明度按钮 - 只改变图片透明度
+  // 50%透明度按钮
   halfOpacityButton.addEventListener('click', async function () {
-    await applyOpacity(0.5, 'image');
-    syncValues(50);
+    await applyOpacity(0.5);
   });
 
-  // 重置按钮 - 重置为默认值
+  // 75%透明度按钮
+  threeQuartersOpacityButton.addEventListener('click', async function () {
+    await applyOpacity(0.75);
+  });
+
+  // 重置按钮
   resetButton.addEventListener('click', async function () {
     try {
-      const response = await chrome.tabs.sendMessage(activeTabId, {
+      await chrome.tabs.sendMessage(activeTabId, {
         action: 'resetOpacity',
       });
-      if (response && response.currentOpacities) {
-        syncValues(response.currentOpacities.image * 100);
-      }
+      syncValues(100);
     } catch (error) {
       console.error('Error resetting opacity:', error);
     }

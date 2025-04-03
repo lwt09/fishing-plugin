@@ -9,7 +9,8 @@
     "build": "rm -rf dist && mkdir dist && cp -r src/* dist/",
     "zip": "cd dist && zip -r ../my-chrome-extension.zip *",
     "dev": "pnpm run build && pnpm run lint && pnpm run format",
-    "watch": "nodemon --watch src -e js,html,css,json --exec 'pnpm run dev'"
+    "watch": "nodemon --watch src -e js,html,css,json --exec 'pnpm run dev'",
+    "release": "node scripts/release.js"
   },
   "author": "",
   "license": "ISC",

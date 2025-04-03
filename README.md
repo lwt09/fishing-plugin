@@ -1,6 +1,14 @@
 # 摸鱼插件
 
-一个简单的 Chrome 浏览器扩展插件，帮助你在浏览网页时更舒适地"摸鱼"。
+当前版本: v1.0.5
+
+## 更新日志
+
+### v1.0.5
+- 支持调节页面图片和视频透明度
+- 提供快捷键 Command+B (Windows: Ctrl+B) 快速调节
+- 提供 50% 和 75% 透明度快捷设置
+- 优化了插件界面和交互体验
 
 ## 功能特点
 
@@ -11,18 +19,12 @@
 
 ## 安装方法
 
-1. 下载插件
-
-   ```bash
-   git clone https://github.com/your-username/fishing-plugin.git
-   ```
-
-2. 在 Chrome 中安装
-   - 打开 Chrome 浏览器
-   - 访问 `chrome://extensions/`
-   - 开启"开发者模式"
-   - 点击"加载已解压的扩展程序"
-   - 选择项目目录
+1. 从 [Releases](https://github.com/你的用户名/fishing-plugin/releases) 页面下载最新版本
+2. 解压下载的 ZIP 文件
+3. 在 Chrome 中打开 `chrome://extensions/`
+4. 开启"开发者模式"
+5. 点击"加载已解压的扩展程序"
+6. 选择解压后的文件夹
 
 ## 使用方法
 

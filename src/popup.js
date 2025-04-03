@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   const resetButton = document.getElementById('reset');
   const applyButton = document.getElementById('apply');
   const halfOpacityButton = document.getElementById('half-opacity');
-  const threeQuartersOpacityButton = document.getElementById('three-quarters-opacity');
+  const threeQuartersOpacityButton = document.getElementById(
+    'three-quarters-opacity'
+  );
 
   // 获取活动标签页ID和初始化面板
   let activeTabId = null;

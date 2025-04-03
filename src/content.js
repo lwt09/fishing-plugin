@@ -61,6 +61,23 @@ function updateOrCreateStyle(opacity) {
       transition: opacity 0.3s ease !important;
     }
 
+    /* 背景图片元素 */
+    html body [style*="background-image"],
+    html body [style*="background:url"],
+    html body [style*="background: url"],
+    html body [class*="bg-image"],
+    html body [class*="background-image"],
+    html body div[style*="background"],
+    html body section[style*="background"],
+    html body article[style*="background"] {
+      opacity: ${opacity} !important;
+      -webkit-opacity: ${opacity} !important;
+      -moz-opacity: ${opacity} !important;
+      -webkit-transition: opacity 0.3s ease !important;
+      transition: opacity 0.3s ease !important;
+      background-blend-mode: multiply !important;
+    }
+
     /* 视频播放器容器 */
     html body .video-container,
     html body .video-player,

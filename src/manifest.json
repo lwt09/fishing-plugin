@@ -3,23 +3,14 @@
   "name": "Image Transparency Toggle",
   "version": "2.0.4",
   "description": "Toggle transparency of images on web pages.",
-  "permissions": [
-    "activeTab",
-    "scripting",
-    "tabs",
-    "storage"
-  ],
+  "permissions": ["activeTab", "scripting", "tabs", "storage"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
     }
   ],
   "action": {

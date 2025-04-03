@@ -143,11 +143,11 @@ async function release(version) {
   console.log('🏷️ 创建发布标签...');
   if (!execCommand(`git tag v${version}`)) return;
   if (!execCommand(`git push origin v${version}`)) return;
-  
+
   // 最后再次推送所有更改以确保触发 GitHub Actions
   console.log('📤 最终推送所有更改...');
   if (!execCommand('git push origin main --follow-tags')) return;
-  
+
   console.log(`
 ✨ 发布流程完成！
 📦 版本从 ${currentVersion} 更新到 ${version}
